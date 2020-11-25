@@ -77,7 +77,7 @@ Checked By @$username ");
 
     
     
-//Send Messages with Markdown (Global)
+//Send Messages(Global)
       function send_message($chat_id, $message){
        $apiToken = "Your Bot API Token";
         $text = urlencode($message);
