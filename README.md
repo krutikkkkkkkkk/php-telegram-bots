@@ -20,6 +20,8 @@ https://youtu.be/1rahwWcSKLM
 
 - [x] Bin Checker
 
+## Check https://github.com/reboot13-git/telegram-bot For all this features in a single Bot [Published on 20-11-20]
+
 ## Reboot13
 
 [Telegram](https://telegram.me/reboot13)
