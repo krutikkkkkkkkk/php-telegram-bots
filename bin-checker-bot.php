@@ -52,7 +52,7 @@ $scheme = $data['scheme'];
 $Brand = $data['brand'];
 $type = $data['type'];
   if ($scheme != null) {
-        send_MDmessage($chat_id, " **
+        send_MDmessage($chat_id, "***
     Bin: $bin
 Type: $scheme
 Brand : $Brand
@@ -60,7 +60,7 @@ Bank: $bank
 Country: $country $emoji
 Currency: $currency
 Credit/Debit:$type
-Checked By @$username ** ");
+Checked By @$username ***");
     }
 else {
     send_MDmessage($chat_id, "Enter Valid BIN");
@@ -78,7 +78,7 @@ else {
       function send_MDmessage($chat_id, $message){
        $apiToken = "Your Bot API Token";
         $text = urlencode($message);
-        file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?chat_id=$chat_id&text=$message&parse_mode=Markdown");
+        file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?chat_id=$chat_id&text=$text&parse_mode=Markdown");
     }
     
 ?>
