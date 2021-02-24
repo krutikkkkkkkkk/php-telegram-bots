@@ -19,11 +19,11 @@
 
 
 
-  if(strpos($message, "/dict") === 0){
+if(strpos($message, "/dict") === 0){
   $dict = substr($message, 6);
   $curl = curl_init();
   curl_setopt_array($curl, [
-  CURLOPT_URL => "https://oxforddictionaryapi.herokuapp.com/?define=$dict&lang=en",
+  CURLOPT_URL => "https://api.dictionaryapi.dev/api/v2/entries/en/$dict",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_ENCODING => "",
@@ -32,12 +32,15 @@
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "GET",
   CURLOPT_HTTPHEADER => [
-    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-        "Accept-Language: en-GB,en-US;q=0.9,en;q=0.8,hi;q=0.7",
-        "Host: oxforddictionaryapi.herokuapp.com",
-        "Sec-Fetch-Dest: empty",
-        "Sec-Fetch-Mode: cors",
-        "Sec-Fetch-Site: cross-site",
+    "accept: */*",
+    "accept-encoding: gzip, deflate, br",
+    "accept-language: en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7",
+    "origin: https://google-dictionary.vercel.app",
+    "referer: https://google-dictionary.vercel.app/",
+    "sec-fetch-dest: empty",
+    "sec-fetch-mode: cors",
+    "sec-fetch-site: cross-site",
+    "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"
         ],
 ]);
 
@@ -46,35 +49,29 @@
   curl_close($curl);
 
 $out = json_decode($dictionary, true);
-$word = $out[0]['word'];
-$noun= $out[0]['meaning']['noun'][0]['definition'];
-$noun1= $out[0]['meaning']['noun'][1]['definition'];
-$noun2= $out[0]['meaning']['noun'][2]['definition'];
-$verb = $out[0]['meaning']['verb'][0]['definition'];
-$adjective = $out[0]['meaning']['adjective'][0]['definition'];
-$adverb = $out[0]['meaning']['adverb'][0]['definition'];
-$pronoun = $out[0]['meaning']['pronoun'][0]['definition'];
+$definition0 = $out[0]['meanings'][0]['definitions'][0]["definition"];
+$definition1 = $out[0]['meanings'][1]['definitions'][0]["definition"];
 
-if ($word = $dict) {
+$example = $out[0]['meanings'][0]['definitions'][0]["example"];
+
+$Voiceurl = $out[0]["phonetics"][0]["audio"];
+
+if ($definition0 != null) {
         send_message($chat_id, "
-Word: $word 
-Noun : 
-1:$noun
+Word: $dict
+meanings : 
+1:$definition0
+2:$definition1
 
-2:$noun1
+Example : $example
 
-3:$noun2
-Pronoun: $pronoun 
-Verb : $verb 
-Adjective: $adjective 
-Adverb: $adverb 
+Pronountitaion : $Voiceurl
 Checked By @$username ");
     }
     else {
         send_message($chat_id, "Invalid Input");
     }
 }
-
     
     
 //Send Messages(Global)
