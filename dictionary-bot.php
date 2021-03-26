@@ -18,7 +18,6 @@
     }
 
 
-
 if(strpos($message, "/dict") === 0){
   $dict = substr($message, 6);
   $curl = curl_init();
@@ -57,19 +56,17 @@ $example = $out[0]['meanings'][0]['definitions'][0]["example"];
 $Voiceurl = $out[0]["phonetics"][0]["audio"];
 
 if ($definition0 != null) {
-        send_message($chat_id, "
+        send_message($chat_id,$message_id, "***
 Word: $dict
 meanings : 
 1:$definition0
 2:$definition1
-
 Example : $example
-
-Pronountitaion : $Voiceurl
-Checked By @$username ");
+Pronunciation : $Voiceurl
+Checked By @$username ***");
     }
     else {
-        send_message($chat_id, "Invalid Input");
+        send_message($chat_id,$message_id, "Invalid Input");
     }
 }
     
