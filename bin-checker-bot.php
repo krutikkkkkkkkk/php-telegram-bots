@@ -9,7 +9,7 @@
     $id = $update["message"]["from"]["id"];
     $username = $update["message"]["from"]["username"];
     $firstname = $update["message"]["from"]["first_name"];
-    $start_msg = $_ENV['START_MSG']; 
+    $start_msg = "xxxxxx"; 
 
 if($message == "/start"){
     send_message($chat_id,$message_id, "***Hey $firstname \nUse !bin xxxxxx to Check BIN \n$start_msg***");
@@ -63,7 +63,7 @@ else {
 }
     function send_message($chat_id,$message_id, $message){
         $text = urlencode($message);
-        $apiToken = $_ENV['API_TOKEN'];  
+        $apiToken = "xxxxxx"; 
         file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?chat_id=$chat_id&reply_to_message_id=$message_id&text=$text&parse_mode=Markdown");
     }
 ?>
